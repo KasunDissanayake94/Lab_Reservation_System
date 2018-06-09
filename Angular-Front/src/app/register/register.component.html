@@ -1,17 +1,18 @@
+<flash-messages></flash-messages>
 <div class="login-form">
-  <form action="/examples/actions/confirmation.php" method="post">
+  <form >
     <h2 class="text-center">Sign Up</h2>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Username" required="required">
+      <input type="text" class="form-control" placeholder="Username" name="username" [(ngModel)]="username" required="required">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Firsy Name Last Name" required="required">
+      <input type="text" class="form-control" placeholder="Full Name" name="name" [(ngModel)]="name" required="required">
     </div>
     <div class="form-group">
-      <input type="email" class="form-control" placeholder="Email" required="required">
+      <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="email" required="required">
     </div>
     <div class="form-group">
-      <input type="password" class="form-control" placeholder="Password" required="required">
+      <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="password" required="required">
     </div>
     <div class="form-group">
       <button type="submit" class="btn btn-primary btn-block" (click)="registerData()">Register</button>
@@ -23,3 +24,4 @@
   </form>
   <p class="text-center"><a href="#">Create an Account</a></p>
 </div>
+

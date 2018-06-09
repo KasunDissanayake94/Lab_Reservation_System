@@ -21,6 +21,9 @@ import { ManagelabsComponent } from './managelabs/managelabs.component';
 //Table Edit
 //import { EditableTableModule } from 'ng-editable-table/editable-table/editable-table.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+//Toast
+import {ToastModule} from 'ng2-toastr/ng2-toastr';
+import { FlashMessagesModule } from 'angular2-flash-messages';
 
 //Import services
 import { AuthService } from './service/auth.service';
@@ -58,6 +61,8 @@ const applicationRouters:Routes = [
     RouterModule.forRoot(applicationRouters),
     BrowserAnimationsModule, CalendarModule.forRoot(),
     NgbModule.forRoot(),
+    ToastModule.forRoot(),
+    FlashMessagesModule.forRoot(),
     AngularDateTimePickerModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,

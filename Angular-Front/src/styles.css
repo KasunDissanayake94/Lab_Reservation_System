@@ -1,5 +1,12 @@
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 @import "~ng-pick-datetime/assets/style/picker.min.css";
-
+body {
+  background-image: url('./assets/images/background1.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-size: cover;
+  background-color: #464646;
+}
 
 

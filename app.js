@@ -1,9 +1,11 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const app = express();
-var bodyParser = require('body-parser')
-
+const express  = require('express');
+const path =  require("path");
+const user = require('./routers/users');
+const mongoose =require('mongoose');
 const config = require('./config/database');
+//Convert html body to json
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const connection = mongoose.connect(config.database);
 if(connection){
@@ -12,24 +14,17 @@ if(connection){
     console.log("Database not connected...");
 }
 
+const app = express();
+app.use(cors());
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
 
-//Call back
-app.get("/",function(req,res){
-    res.send("Hello World")
-
-});
-
-app.get("/users",function(req,res){
-    res.send("Hello Users")
-
-});
-//Create server using express
+app.use('/',user);
 
 app.listen(3000,function(){
     console.log("Listening to port 3000");
-})
+});

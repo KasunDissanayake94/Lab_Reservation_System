@@ -1,5 +1,6 @@
 <app-slidebar></app-slidebar>
-<div class="container">
+<div class="container" style="background-color: #e5e5e5;margin-top: 2%">
+  <br>
   <input #search class="search" type="text" placeholder="Search..." (keydown.enter)="onSearch(search.value)">
   <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
 </div>
