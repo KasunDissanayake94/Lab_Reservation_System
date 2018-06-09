@@ -20,8 +20,9 @@ export class LoginComponent implements OnInit {
     }
     this.authService.logginuser(userdetails).subscribe(res=>{
       if(res.state == true){
+        this.router.navigate(['dashboard']);
         this._flashMessagesService.show('Logged in Successfully!', { cssClass: 'alert-success', timeout: 3000 });
-        this.router.navigate(['managelabs']);
+
       }else if(res.state == false){
         this._flashMessagesService.show('Invalid username or password!', { cssClass: 'alert-danger', timeout: 3000});
         this.router.navigate(['login']);

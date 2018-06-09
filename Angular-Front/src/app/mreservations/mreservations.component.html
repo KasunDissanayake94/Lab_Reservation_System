@@ -1,0 +1,85 @@
+<app-slidebar>
+</app-slidebar><div class="container" style="background-color: #e5e5e5;margin-top: 2%">
+  <form class="form-horizontal">
+    <fieldset>
+      <!-- Form Name -->
+      <legend>Manage Lab Reservation</legend>
+
+
+
+      <!-- Select Basic -->
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="eventType">Lab Number</label>
+        <div class="col-md-4">
+          <select id="eventType" name="eventType" class="form-control">
+            <option value="LabA">Lab A</option>
+            <option value="LabB">Lab B</option>
+            <option value="LabC">Lab C </option>
+            <option value="LabD">Lab D </option>
+            <option value="3rd Year Lab">3rd Year Lab </option>
+            <option value="4rd Year Lab">4rd Year Lab </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="eventDate">Date and Time</label>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input id="eventDate" class="form-control" [owlDateTimeTrigger]="dt10" [owlDateTime]="dt10" required [selectMode]="'range'">
+            <br>
+            <span [owlDateTimeTrigger]="dt10"><i class="fa fa-calendar"></i></span>
+            <owl-date-time #dt10></owl-date-time>
+            <span class="input-group-addon"></span>
+          </div>
+        </div>
+      </div>
+      
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="courseType">Course</label>
+        <div class="col-md-4">
+          <select id="courseType" name="courseType" class="form-control">
+            <option value="LabA">CS</option>
+            <option value="LabB">IS</option>
+            <option value="LabB">BIT</option>
+            <option value="LabB">OTHER</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="subjectType">Subject</label>
+        <div  class="col-md-4">
+          <select id="subjectType" name="subjectType" class="form-control">
+            <option value="LabA">SCS001</option>
+            <option value="LabB">IS002</option>
+            <option value="LabB">BIT002</option>
+            <option value="LabB">OTHER</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="lecturerType">Lecturer</label>
+        <div  class="col-md-4">
+          <select id="lecturerType" name="lecturerType" class="form-control">
+            <option value="LabA">K.Silva</option>
+            <option value="LabB">S.Perera</option>
+            <option value="LabB">D.Dissanayake</option>
+            <option value="LabB">R.Dulmina</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Button (Double) -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="submitButton"></label>
+        <div class="col-md-8">
+          <button id="submitButton" name="submitButton" class="btn btn-primary">Add Reservation</button>
+          <button id="cancelButton" name="cancelButton" class="btn btn-danger">Cancel</button>
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
+</div>
