@@ -22,7 +22,12 @@ import { ManagelabsComponent } from './managelabs/managelabs.component';
 //import { EditableTableModule } from 'ng-editable-table/editable-table/editable-table.module';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 
+//Import services
+import { AuthService } from './service/auth.service';
+import { HomeComponent } from './home/home.component';
+
 const applicationRouters:Routes = [
+  {path:'',component:HomeComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
   {path:'reservation',component:ReservationComponent},
@@ -45,7 +50,8 @@ const applicationRouters:Routes = [
     UserComponent,
     RequestsComponent,
     ChecklabsComponent,
-    ManagelabsComponent
+    ManagelabsComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +63,7 @@ const applicationRouters:Routes = [
     OwlNativeDateTimeModule,
     Ng2SmartTableModule,
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

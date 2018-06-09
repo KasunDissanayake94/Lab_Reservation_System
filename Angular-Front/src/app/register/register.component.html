@@ -2,19 +2,19 @@
   <form action="/examples/actions/confirmation.php" method="post">
     <h2 class="text-center">Sign Up</h2>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="FirstName" required="required">
+      <input type="text" class="form-control" placeholder="Username" required="required">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="LastName" required="required">
+      <input type="text" class="form-control" placeholder="Firsy Name Last Name" required="required">
     </div>
     <div class="form-group">
       <input type="email" class="form-control" placeholder="Email" required="required">
     </div>
     <div class="form-group">
-      <input type="text" class="form-control" placeholder="Username" required="required">
+      <input type="password" class="form-control" placeholder="Password" required="required">
     </div>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary btn-block">Log in</button>
+      <button type="submit" class="btn btn-primary btn-block" (click)="registerData()">Register</button>
     </div>
     <div class="clearfix">
       <label class="pull-left checkbox-inline"><input type="checkbox"> Remember me</label>

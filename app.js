@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
+var bodyParser = require('body-parser')
 
 const config = require('./config/database');
 
@@ -10,6 +11,12 @@ if(connection){
 }else{
     console.log("Database not connected...");
 }
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
+
 
 //Call back
 app.get("/",function(req,res){
