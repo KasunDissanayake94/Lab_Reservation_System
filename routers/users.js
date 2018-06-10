@@ -27,9 +27,7 @@ router.post("/register",function(req,res){
 
 });
 router.post("/login",function(req,res){
-
-
-
+    console.log("back");
     const email = req.body.email;
     const password = req.body.password;
     User.findByEmail(email,function (err,user) {
@@ -41,7 +39,7 @@ router.post("/login",function(req,res){
         else if(user){
             User.passwordCheck(password,user.password,function(err,match){
                 if(match){
-                    const token = jwt.sign(user, config.secret,{expiresIn:86400});
+                    const token = jwt.sign(user.toJSON(), config.secret,{expiresIn:86400});
                     res.json(
                         {
                             state:true,msg:"User matched",
@@ -53,6 +51,7 @@ router.post("/login",function(req,res){
                                 email:user.email
                             }
                         });
+                    console.log(token);
                 }else{
                     res.json({state:false,msg:"User doesnot matched"});
                 }
@@ -66,10 +65,10 @@ router.post("/login",function(req,res){
 
 
 });
-router.post("/user", passport.authenticate('jwt', { session: false }),
+router.get('/dashboard', passport.authenticate('jwt', { session: false }),
     function(req, res) {
-        res.json({user:user.profile});
-        console.log("awa");
+    console.log(res);
+        res.json({user:req.user});
     }
 );
 
