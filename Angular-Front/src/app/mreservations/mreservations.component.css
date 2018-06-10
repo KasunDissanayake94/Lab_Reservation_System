@@ -1,0 +1,63 @@
+h1 {
+  margin: 10px 0;
+}
+hr {
+  margin: .5em 0;
+}
+h1 {
+@media (max-width: 768px) {
+  text-align: center;
+}
+}
+h2.h5 {
+  text-align: right;
+@media (max-width: 768px) {
+  text-align: center;
+}
+}
+.table {
+> tbody > tr > td, > thead > tr > th {
+  vertical-align: middle;
+}
+td, th {
+&:first-child {
+   text-align: center;
+@media (max-width: 768px) {
+  display: none;
+}
+}
+&:nth-child(2) {
+.time {
+  font-weight: bold;
+&:before {
+   font-family: 'Glyphicons Halflings';
+   content: '\e023';
+   padding-right: .5em;
+ }
+}
+strong {
+  font-size: 1.1em;
+&:before {
+   font-family: 'Glyphicons Halflings';
+   content: '\e233';
+   padding-right: .5em;
+ }
+}
+em {
+&:before {
+   font-family: 'Glyphicons Halflings';
+   content: '\e008';
+   padding-right: .5em;
+ }
+}
+.glyphicon {
+  padding-right: .5em;
+}
+}
+em {
+//font-size: 80%;
+  font-weight: 400;
+  color: #636c72;
+}
+}
+}

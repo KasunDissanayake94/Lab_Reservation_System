@@ -6,6 +6,7 @@ const config = require('./config/database');
 //Convert html body to json
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const passport = require('passport');
 
 const connection = mongoose.connect(config.database);
 if(connection){
@@ -21,6 +22,10 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());
+//Initialize passport
+require('./config/passport')(passport);
 
 
 app.use('/',user);

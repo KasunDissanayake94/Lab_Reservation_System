@@ -39,3 +39,7 @@ module.exports.passwordCheck = function (password,hash,callback) {
 
 
 }
+module.exports.findUserbyId = function(id,callback){
+    User.findOne(id,callback);
+
+}

@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const path =  require("path");
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
+const config = require('../config/database');
+const passport = require('passport');
 
 
 router.post("/register",function(req,res){
@@ -37,9 +40,19 @@ router.post("/login",function(req,res){
         }
         else if(user){
             User.passwordCheck(password,user.password,function(err,match){
-
                 if(match){
-                    res.json({state:true,msg:"User matched"});
+                    const token = jwt.sign(user, config.secret,{expiresIn:86400});
+                    res.json(
+                        {
+                            state:true,msg:"User matched",
+                            token: "JWT " + token,
+                            user : {
+                                id:user._id,
+                                name:user.name,
+                                username:user.username,
+                                email:user.email
+                            }
+                        });
                 }else{
                     res.json({state:false,msg:"User doesnot matched"});
                 }
@@ -53,5 +66,11 @@ router.post("/login",function(req,res){
 
 
 });
+router.post("/user", passport.authenticate('jwt', { session: false }),
+    function(req, res) {
+        res.json({user:user.profile});
+        console.log("awa");
+    }
+);
 
 module.exports =  router;

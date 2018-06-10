@@ -1,85 +1,137 @@
-<app-slidebar>
-</app-slidebar><div class="container" style="background-color: #e5e5e5;margin-top: 2%">
-  <form class="form-horizontal">
-    <fieldset>
-      <!-- Form Name -->
-      <legend>Manage Lab Reservation</legend>
-
-
-
-      <!-- Select Basic -->
-
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="eventType">Lab Number</label>
-        <div class="col-md-4">
-          <select id="eventType" name="eventType" class="form-control">
-            <option value="LabA">Lab A</option>
-            <option value="LabB">Lab B</option>
-            <option value="LabC">Lab C </option>
-            <option value="LabD">Lab D </option>
-            <option value="3rd Year Lab">3rd Year Lab </option>
-            <option value="4rd Year Lab">4rd Year Lab </option>
-          </select>
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="eventDate">Date and Time</label>
-        <div class="col-md-4">
-          <div class="input-group">
-            <input id="eventDate" class="form-control" [owlDateTimeTrigger]="dt10" [owlDateTime]="dt10" required [selectMode]="'range'">
-            <br>
-            <span [owlDateTimeTrigger]="dt10"><i class="fa fa-calendar"></i></span>
-            <owl-date-time #dt10></owl-date-time>
-            <span class="input-group-addon"></span>
+<app-slidebar></app-slidebar>
+<div class="container" style="background-color: #e5e5e5;margin-top: 2%">
+  <div class="row">
+    <div class="col-md-6">
+      <form class="form-horizontal">
+        <legend>Reserve a Lab</legend>
+          <div class="form-group">
+            <label class="col-md-12 control-label" for="eventType">Lab Number</label>
+            <div class="col-md-12">
+              <select id="eventType" name="eventType" class="form-control">
+                <option value="LabA">Lab A</option>
+                <option value="LabB">Lab B</option>
+                <option value="LabC">Lab C </option>
+                <option value="LabD">Lab D </option>
+                <option value="3rd Year Lab">3rd Year Lab </option>
+                <option value="4rd Year Lab">4rd Year Lab </option>
+              </select>
+            </div>
           </div>
-        </div>
-      </div>
-      
 
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="courseType">Course</label>
-        <div class="col-md-4">
-          <select id="courseType" name="courseType" class="form-control">
-            <option value="LabA">CS</option>
-            <option value="LabB">IS</option>
-            <option value="LabB">BIT</option>
-            <option value="LabB">OTHER</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="subjectType">Subject</label>
-        <div  class="col-md-4">
-          <select id="subjectType" name="subjectType" class="form-control">
-            <option value="LabA">SCS001</option>
-            <option value="LabB">IS002</option>
-            <option value="LabB">BIT002</option>
-            <option value="LabB">OTHER</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="lecturerType">Lecturer</label>
-        <div  class="col-md-4">
-          <select id="lecturerType" name="lecturerType" class="form-control">
-            <option value="LabA">K.Silva</option>
-            <option value="LabB">S.Perera</option>
-            <option value="LabB">D.Dissanayake</option>
-            <option value="LabB">R.Dulmina</option>
-          </select>
-        </div>
-      </div>
+          <div class="form-group">
+            <label class="col-md-12 control-label" for="eventDate">Date and Time</label>
+            <div class="col-md-12">
+              <div class="input-group">
+                <input id="eventDate" class="form-control" [owlDateTimeTrigger]="dt10" [owlDateTime]="dt10" required [selectMode]="'range'">
+                <br>
+                <span [owlDateTimeTrigger]="dt10"><i class="fa fa-calendar"></i></span>
+                <owl-date-time #dt10></owl-date-time>
+                <span class="input-group-addon"></span>
+              </div>
+            </div>
+          </div>
 
-      <!-- Button (Double) -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="submitButton"></label>
-        <div class="col-md-8">
-          <button id="submitButton" name="submitButton" class="btn btn-primary">Add Reservation</button>
-          <button id="cancelButton" name="cancelButton" class="btn btn-danger">Cancel</button>
-        </div>
-      </div>
 
-    </fieldset>
-  </form>
+          <div class="form-group">
+            <label class="col-md-12 control-label" for="courseType">Course</label>
+            <div class="col-md-12">
+              <select id="courseType" name="courseType" class="form-control">
+                <option value="LabA">CS</option>
+                <option value="LabB">IS</option>
+                <option value="LabB">BIT</option>
+                <option value="LabB">OTHER</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-12 control-label" for="subjectType">Subject</label>
+            <div  class="col-md-12">
+              <select id="subjectType" name="subjectType" class="form-control">
+                <option value="LabA">SCS001</option>
+                <option value="LabB">IS002</option>
+                <option value="LabB">BIT002</option>
+                <option value="LabB">OTHER</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-12 control-label" for="lecturerType">Lecturer</label>
+            <div  class="col-md-12">
+              <select id="lecturerType" name="lecturerType" class="form-control">
+                <option value="LabA">K.Silva</option>
+                <option value="LabB">S.Perera</option>
+                <option value="LabB">D.Dissanayake</option>
+                <option value="LabB">R.Dulmina</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Button (Double) -->
+          <div class="form-group">
+            <label class="col-md-12 control-label" for="submitButton"></label>
+            <div class="col-md-12">
+              <button id="submitButton" name="submitButton" class="btn btn-primary">Add Reservation</button>
+              <button id="cancelButton" name="cancelButton" class="btn btn-danger">Cancel</button>
+            </div>
+          </div>
+
+      </form>
+    </div>
+    <div class="col-sm-6">
+      <div class="">
+        <table class="table table-striped table-bordered">
+          <thead class="hidden-xs">
+          <tr>
+            <th>Time</th>
+            <th>Events</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><strong>8:00</strong></td>
+            <td><div class="visible-xs time">8:00<br></div>Registration / Breakfast / Sponsors / Meetups</td>
+          </tr>
+          <tr>
+            <td><strong>9:00</strong></td>
+            <td><div class="visible-xs time">9:00<br></div>Welcome / Opening Remarks</td>
+          </tr>
+          <tr>
+            <td><strong>9:15</strong></td>
+            <td><div class="visible-xs time">9:15<br></div><strong>Practical Forms with React and Mobx</strong><br><em>MATT RUBY - Web Developer - Room &amp; Board</em><br>Have you tried building forms with React? Wrangling all the html attributes and keeping everything synced up leaving you wishing
+              for the good old jQuery days? Well, I'm going to show you a few practical ways to build stateless, maintainable and performant forms the &quot;React&quot; way. We'll go through a simple model driven approach that accounts for input validation,
+              suggestions and async form submission.<br><br><div class="visible-xs time">9:15<br></div><strong>Inner Source In a Big Company: How Not to Suck</strong><br><em>BRYANT NOICE - Senior Director, EA - Target</em><br>Target has embraced open source and inner source as the logical development
+              model for a product-based company. We've contributed some things externally, and have dove head-first into the uncertain world of inner source. This topic will cover a little bit of what inner source is, how Target approached it, some successful
+              (and not so successful) projects, and the need for an open source focus in modern companies.<br><br><div class="visible-xs time">9:15<br></div><strong>Learning Docker and Kubernetes with OpenShift</strong><br><em>KEITH RESAR - Solutions Architect - Red Hat</em><br>Everyone's heard
+              about Docker and how it's going to solve all of our problems, or not. In this session, we'll walk you through using Docker and discuss why using a scheduler and orchestration system is important. Then we'll dive into actual usage of the container
+              application platform, OpenShift Origin, to show how it makes both Docker and Kubernetes accessible to the average human being. We'll keep the slides to a minimum and instead focus on live demo/coding/deployments. After deploying several containers,
+              we'll turn up the heat by showcasing scaling and moving on to deployment strategies including blue/green.<br><br><div class="visible-xs time">9:15<br></div><strong>Approaching WebAssembly</strong><br><em>DAN CALLAHAN - Staff Software Engineer - Mozilla</em><br>WebAssembly is a new,
+              low-level alternative to JavaScript on the Web and supported by all major browsers. With its debut in March this year, WebAssembly promises to shatter the performance and code re-use barriers between the Web and &quot;native&quot; platforms.
+              In addition to a demonstration of compiling unmodified C/C++ libraries to the Web, this session will answer:<br> 1. What is WebAssembly?<br> 2. What necessitated its creation?<br> 3. How does it work?<br> 4. How can you use it today?<br> 5.
+              What is its future?
+              <br><br><div class="visible-xs time">9:15<br></div><strong>Our Web Application Journey</strong><br><em>NATER JORDE - Senior Web Software Engineer - Code42</em><br>Over the past year, Code42 has begun to implement a variety of changes to our web application development. These changes
+              include: Switching all new development to use React; Writing all new web apps in TypeScript; Utilizing a single UI library; Improving our continuous development environment; Expanding our automated testing practices; This talk will cover each
+              area in three parts; what we tried, what didn’t work and how we decided to move forward.<br><br><div class="visible-xs time">9:15<br></div><strong>Next Generation Version Control</strong><br><em>KEVIN BULLOCK - Senior Application Architect - Software for Good</em><br>Distributed version
+              control systems (DVCS) like Mercurial and, in particular, Git, have become a standard part of the developer toolkit over the past decade. They are an evolutionary leap beyond the systems that preceded them, but they have limitations when used
+              in unique software environments. Software for Good’s Kevin Bullock will look at how distributed version control is evolving at companies like Google and Facebook, and how they are scaling Mercurial to support unimaginably large source repositories.</td>
+          </tr>
+
+          <tr>
+            <td><strong>11:35</strong></td>
+            <td><span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>Lunch</td>
+          </tr>
+
+          <tr>
+            <td><strong>4:20</strong></td>
+            <td>Closing Remarks / Prizes</td>
+          </tr>
+          <tr>
+            <td><strong>4:30</strong></td>
+            <td>Happy Hour</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <p><small>**Note: Schedule and Speakers are subject to change.</small></p>
+    </div>
+  </div>
 </div>

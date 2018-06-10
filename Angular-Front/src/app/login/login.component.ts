@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
       password : this.password
     }
     this.authService.logginuser(userdetails).subscribe(res=>{
+      console.log(res);
       if(res.state == true){
         this.router.navigate(['dashboard']);
         this._flashMessagesService.show('Logged in Successfully!', { cssClass: 'alert-success', timeout: 3000 });
