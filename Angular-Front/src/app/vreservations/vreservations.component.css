@@ -1,8 +1,19 @@
-h3 {
-  margin: 0 0 10px;
+.class1 {
+  background: #3498db;
 }
 
-pre {
-  background-color: #f5f5f5;
-  padding: 15px;
+.class2 {
+  background: #27ae60;
+}
+
+.class3 {
+  background: #e74c3c;
+}
+
+.class4 {
+  background: #e67e22;
+}
+
+.class5 {
+  background: #1abc9c;
 }
