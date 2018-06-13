@@ -29,6 +29,9 @@ import { HomeComponent } from './home/home.component';
 import { MreservationsComponent } from './mreservations/mreservations.component';
 import { SreservationsComponent } from './sreservations/sreservations.component';
 import { ReportsComponent } from './reports/reports.component';
+import { VreservationsComponent } from './vreservations/vreservations.component';
+//Calander
+import { CalendarModule } from 'angular-calendar';
 
 
 
@@ -43,6 +46,7 @@ const applicationRouters:Routes = [
   {path:'sreservations',component:SreservationsComponent},
   {path:'reports',component:ReportsComponent},
   {path:'dashboard',component:DashboardComponent},
+  {path:'vreservations',component:VreservationsComponent},
 ];
 
 @NgModule({
@@ -61,6 +65,8 @@ const applicationRouters:Routes = [
     SreservationsComponent,
     ReportsComponent,
     DashboardComponent,
+    VreservationsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -68,6 +74,7 @@ const applicationRouters:Routes = [
     BrowserAnimationsModule,
     NgbModule.forRoot(),
     ToastModule.forRoot(),
+    CalendarModule.forRoot(),
     FlashMessagesModule.forRoot(),
     AngularDateTimePickerModule,
     OwlDateTimeModule,

@@ -46,4 +46,18 @@ export class AuthService {
 
 
   }
+//Add a reservation
+  addreservation(reserv: { date: string; start_time: string; lab: string; lecturer: string; subject: string; course: string }) {
+    console.log(reserv);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post("http://localhost:3000/sreservations",reserv,{headers:headers}).map(res=>res.json());
+  }
+//Search reservations for a perticular date and time
+  serach_reservations(search : any) {
+    console.log(search);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post("http://localhost:3000/sreservations",search,{headers:headers}).map(res=>res.json());
+  }
 }
