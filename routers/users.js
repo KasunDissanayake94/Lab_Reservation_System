@@ -94,22 +94,40 @@ router.post("/sreservations",function(req,res){
             start_time : req.body.start_time,
 
         });
+        console.log(reservation);
         reservation.searchReservation(search_reservation,function(err,reservation){
             if(reservation){
                 console.log("////");
-                console.log(reservation.date);
-                res.json({state:true,msg:"Item found...",date : reservation.date,
-                    start_time : reservation.start_time,
-                    lab : reservation.lab,
-                    course : reservation.course,
-                    subject : reservation.subject,
-                    lecturer : reservation.lecturer});
+                console.log(reservation);
+                res.json({state:true,msg:"Item found...",dataset:reservation});
             }else{
                 res.json({state:false,msg:"No such data..."});
                 console.log("data not found");
             }
         });
     }
+
+
+
+
+});
+//Search All labs
+//Do a reservation
+router.post("/vreservations",function(req,res){
+        //Search reservations for the date and time slot
+    const search_date = new reservation({
+        date : req.body.date,
+
+    });
+        console.log("Searching for--",search_date);
+        reservation.search_labs(search_date,function(err,labs){
+            if(labs){
+                res.json({state:true,msg:"Item found...",labset:labs});
+            }else{
+                res.json({state:false,msg:"No such data..."});
+                console.log("data not found");
+            }
+        });
 
 
 

@@ -24,7 +24,7 @@
           <thead>
           <tr class="table-active">
             <th scope="col">#</th>
-            <th scope="col">LAB A</th>
+            <th  scope="col">LAB A</th>
             <th scope="col">LAB B</th>
             <th scope="col">LAB C</th>
             <th scope="col">LAB D</th>
@@ -33,26 +33,19 @@
             <th scope="col">OTHER</th>
           </tr>
           </thead>
-          <tbody  *ngFor="let item of labs">
+          <tbody  *ngFor="let item of time_slots">
           <tr>
             <th scope="row">{{item}}</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
+            <td *ngFor="let item1 of reserved_labs"><div *ngIf="item == item1.start_time"> Mark</div></td>
+
           </tr>
 
           </tbody>
         </table>
-
       </div>
       <p><small>**Note: Schedule and Speakers are subject to change.</small></p>
     </div>
   </div>
-
 
 </div>
 

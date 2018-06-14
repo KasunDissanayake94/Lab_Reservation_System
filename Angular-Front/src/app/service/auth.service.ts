@@ -60,4 +60,12 @@ export class AuthService {
     headers.append('Content-Type', 'application/json');
     return this.http.post("http://localhost:3000/sreservations",search,{headers:headers}).map(res=>res.json());
   }
+
+  //Search all labs
+  search_labs(search : any) {
+    console.log(search);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post("http://localhost:3000/vreservations",search,{headers:headers}).map(res=>res.json());
+  }
 }

@@ -52,17 +52,23 @@
           <thead class="hidden-xs">
           <tr>
             <th>Time</th>
-            <th>Labs</th>
-            <th>Reservation Status</th>
+            <th>Lab No</th>
+            <th>Reservation Details</th>
+            <th>Free or Reserved</th>
           </tr>
           </thead>
-          <tbody *ngFor="let item of labs">
-          <tr *ngFor="let labitem of lab_array">
+          <tbody>
+          <tr *ngFor="let labitem of dataset">
               <td><strong>{{search.start_time}}AM</strong></td>
-              <td *ngIf="(labitem.lab != item)"><div class="visible-xs time">Lab No : {{item}}</div></td>
-              <td *ngIf="(labitem.lab == item)"><div class="visible-xs time">{{search.start_time}}AM<br></div>Lab No : {{labitem.lab}}<br>Course : {{labitem.course}}<br>Subject : {{labitem.subject}}<br>Lecturer Name : {{labitem.lecturer}}</td>
-              <td *ngIf="(labitem.lab != item)"><div class="visible-xs time"><br></div><button  name="submitButton" class="btn btn-primary" (click)="doreservation()">Reserve Now</button></td>
-              <td *ngIf="(labitem.lab == item)"><div class="visible-xs time"><br></div><button  name="submitButton" class="btn btn-primary" disabled (click)="doreservation()">Reserved</button></td>
+              <td><div class="visible-xs time">Lab No : {{labitem.lab}}</div></td>
+              <td><div class="visible-xs time">{{search.start_time}}AM<br></div>Lab No : {{labitem.lab}}<br>Course : {{labitem.course}}<br>Subject : {{labitem.subject}}<br>Lecturer Name : {{labitem.lecturer}}</td>
+              <td><div class="visible-xs time"><br></div><button  name="submitButton" class="btn btn-primary" disabled (click)="doreservation(labitem.lab)">Reserved</button></td>
+          </tr>
+          <tr *ngFor="let item of labs" >
+            <td><strong>{{search.start_time}}AM</strong></td>
+            <td><div class="visible-xs time">Lab No : {{item}}</div></td>
+            <td><div class="visible-xs time">{{search.start_time}}AM<br></div></td>
+            <td><div class="visible-xs time"><br></div><button  name="submitButton" class="btn btn-primary"  (click)="doreservation(item)">Free</button></td>
           </tr>
           </tbody>
         </table>
@@ -104,7 +110,7 @@
 
               <div class="form-group">
                 <label for="labid">Lab No</label>
-                <input type="text" class="form-control" id="labid"    value={{reserv.lab}} disabled >
+                <input type="text" class="form-control" id="labid"    value={{selected_lab}} disabled >
               </div>
               <div class="form-group">
                 <label for="corid">Course</label>

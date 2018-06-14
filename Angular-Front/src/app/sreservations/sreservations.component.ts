@@ -24,6 +24,8 @@ export class SreservationsComponent implements OnInit {
 
   public lab_array = [];
   public labs = ['LAB A','LAB B','LAB C','LAB D','LAB E','ELECTRONIC LAB','3RD YEAR LAB','4TH YEAR LAB','x'];
+  public canreservelabs = ['LAB A','LAB B','LAB C','LAB D','LAB E','ELECTRONIC LAB','3RD YEAR LAB','4TH YEAR LAB','x'];
+  public  freelabs = ['LAB A','LAB B','LAB C','LAB D','LAB E','ELECTRONIC LAB','3RD YEAR LAB','4TH YEAR LAB','x'];
 
   reserv = {
     date: '',
@@ -40,6 +42,8 @@ export class SreservationsComponent implements OnInit {
   }
   private result: any;
   private displaytable: string;
+  private selected_lab: string;
+  private dataset: any;
 
   constructor(private authService : AuthService,private router: Router,private _flashMessagesService: FlashMessagesService) {
     this.displaytable='none';
@@ -49,7 +53,10 @@ export class SreservationsComponent implements OnInit {
   ngOnInit() {
   }
 //To the Model--------------------------
-  doreservation() {
+  doreservation(selectlab) {
+    console.log("Lb is here",selectlab);
+    this.selected_lab = selectlab;
+    this.reserv.lab = this.selected_lab;
     this.display="block";
   }
   closeResolved(){
@@ -60,6 +67,7 @@ export class SreservationsComponent implements OnInit {
   }
   //----------------------------------------
   addrevervation(){
+    this.display='none';
     this.authService.addreservation(this.reserv).subscribe(res=>{
       if(res.state == true){
         this._flashMessagesService.show('Reservation Done Successfully!', { cssClass: 'alert-success', timeout: 5000 });
@@ -72,15 +80,16 @@ export class SreservationsComponent implements OnInit {
   search_labs(){
     this.search.date = this.reserv.date;
     this.search.start_time = this.reserv.start_time;
-    console.log(this.search);
+    console.log(this.search.date);
     this.authService.serach_reservations(this.search).subscribe(res=>{
-      this.displaytable="block";
-      this.result = res;
-      console.log(this.lab_array);
-      this.lab_array.push({start_time:res.start_time,lab:res.lab,course:res.course,subject:res.subject});
-
+      this.lab_array.push(res.dataset);
+      this.dataset = res.dataset;
+      this.displaytable = "block";
     });
-  }
+
+
+
+    }
 
   cancelsearch() {
     this.reserv.date = '';
@@ -95,4 +104,5 @@ export class SreservationsComponent implements OnInit {
     this.lab_array = [];
 
   }
+
 }

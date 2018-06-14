@@ -20,30 +20,14 @@ module.exports.savereservation = function(reservation,callback){
 };
 
 module.exports.searchReservation = function(reserv,callback){
-    console.log(reserv);
     const query  = { date: reserv.date, start_time: reserv.start_time } ;
-    reservation.findOne(query,callback);
+    reservation.find(query,callback);
 
 };
-// module.exports.findByEmail = function (email,callback) {
-//     const query = {email:email};
-//     User.findOne(query,callback);
-// }
-// module.exports.passwordCheck = function (password,hash,callback) {
-//
-//     bcrypt.compare(password, hash, function(err, res) {
-//         if(res == false){
-//             callback(null, res);
-//         }
-//
-//         if (res) {
-//             callback(null, res);
-//         }
-//     });
-//
-//
-// }
-// module.exports.findUserbyId = function(id,callback){
-//     User.findOne(id,callback);
-//
-//}
+
+module.exports.search_labs = function(search_date,callback){
+    console.log(search_date);
+    const query  = { date: search_date.date } ;
+    reservation.find(query,callback);
+
+};
