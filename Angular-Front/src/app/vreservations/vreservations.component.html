@@ -5,7 +5,7 @@
     <div class="col-md-3">
       <p>Simple datepicker</p>
 
-      <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next"></ngb-datepicker>
+      <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next" (select)="all_reservations()"></ngb-datepicker>
 
       <hr/>
 
@@ -33,9 +33,9 @@
             <th scope="col">OTHER</th>
           </tr>
           </thead>
-          <tbody>
+          <tbody  *ngFor="let item of labs">
           <tr>
-            <th scope="row">1</th>
+            <th scope="row">{{item}}</th>
             <td>Mark</td>
             <td>Otto</td>
             <td>@mdo</td>
@@ -44,27 +44,7 @@
             <td>@mdo</td>
             <td>@mdo</td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <div class="class1"><td>Thornton</td></div>
-            <td>@fat</td>
-            <td>@fat</td>
-            <td>@fat</td>
-            <td>@fat</td>
-            <td>@fat</td>
-          </tr>
 
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-          </tr>
           </tbody>
         </table>
 
