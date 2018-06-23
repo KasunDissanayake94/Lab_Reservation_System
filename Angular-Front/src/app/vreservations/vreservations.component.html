@@ -3,20 +3,19 @@
 <div class="container" style="background-color: #e5e5e5;margin-top: 2%">
   <div class="row">
     <div class="col-md-3">
-      <p>Simple datepicker</p>
-
+      <p>Pick a date to check</p>
       <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next" (select)="all_reservations()"></ngb-datepicker>
-
       <hr/>
-
       <button class="btn btn-sm btn-outline-primary mr-2" (click)="selectToday()">Select Today</button>
       <button class="btn btn-sm btn-outline-primary mr-2" (click)="dp.navigateTo()">To current month</button>
       <button class="btn btn-sm btn-outline-primary mr-2" (click)="dp.navigateTo({year: 2013, month: 2})">To Feb 2013</button>
-
       <hr/>
+      <!--<pre>Month: {{ date.month }}.{{ date.year }}</pre>-->
+      <!--<pre>Model: {{ model | json }}</pre>-->
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> Reserved Slots</div>
+      </div>
 
-      <pre>Month: {{ date.month }}.{{ date.year }}</pre>
-      <pre>Model: {{ model | json }}</pre>
     </div>
     <div class="col-md-9">
       <div class="">
@@ -28,6 +27,7 @@
             <th scope="col">LAB B</th>
             <th scope="col">LAB C</th>
             <th scope="col">LAB D</th>
+            <th scope="col">ELECTRONIC LAB</th>
             <th scope="col">3RD YEAR LABS</th>
             <th scope="col">4TH YEAR LABS</th>
             <th scope="col">OTHER</th>
@@ -36,7 +36,9 @@
           <tbody  *ngFor="let item of time_slots">
           <tr>
             <th scope="row">{{item}}</th>
-            <td *ngFor="let item1 of reserved_labs"><div *ngIf="item == item1.start_time"> Mark</div></td>
+            <td *ngFor="let item2 of labs"><div *ngFor="let item1 of reserved_labs"><div *ngIf="(item == item1.start_time) && (item2 == item1.lab)"> <div class="progress">
+              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+            </div></div></div></td>
 
           </tr>
 

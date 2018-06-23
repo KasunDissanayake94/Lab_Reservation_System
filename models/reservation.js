@@ -15,7 +15,6 @@ const reservationSchema = new Schema({
 const reservation =  module.exports = mongoose.model("reservation",reservationSchema);
 
 module.exports.savereservation = function(reservation,callback){
-    //To hash password
     reservation.save(callback);
 };
 

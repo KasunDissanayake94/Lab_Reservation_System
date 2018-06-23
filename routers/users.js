@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path =  require("path");
 const reservation = require('../models/reservation');
+const request = require('../models/request');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
@@ -87,6 +88,23 @@ router.post("/sreservations",function(req,res){
                 res.json({state:true,msg:"Okay..."});
             }
         });
+    }else if(req.body.request_by){
+        const request_labs = new request({
+            date : req.body.date,
+            start_time : req.body.start_time,
+            lab : req.body.lab,
+            request_by : req.body.request_by
+        });
+
+        request.saverequests(request_labs,function(err,request_labs){
+            console.log(request_labs);
+            if(err){
+                res.json({state:false,msg:"Failed"});
+            }if (request_labs){
+                res.json({state:true,msg:"Added"});
+            }
+        });
+
     }else{
         //Search reservations for the date and time slot
         const search_reservation = new reservation({
@@ -112,16 +130,15 @@ router.post("/sreservations",function(req,res){
 
 });
 //Search All labs
-//Do a reservation
 router.post("/vreservations",function(req,res){
         //Search reservations for the date and time slot
     const search_date = new reservation({
         date : req.body.date,
 
     });
-        console.log("Searching for--",search_date);
         reservation.search_labs(search_date,function(err,labs){
             if(labs){
+                console.log("Reservations",labs);
                 res.json({state:true,msg:"Item found...",labset:labs});
             }else{
                 res.json({state:false,msg:"No such data..."});
@@ -134,11 +151,56 @@ router.post("/vreservations",function(req,res){
 
 });
 
+//get all requests
+router.post("/requests",function(req,res){
+
+    request.findRuquests(function (err,requests) {
+        if(err) {
+            console.log("Requests",requests);
+            res.json({state:false,msg:"Item not found"});
+        }else if(requests){
+            console.log("Requests",requests);
+            res.json({state:true,msg:"Item found...",requests:requests});
+        }
+
+    });
+});
+router.post("/requests/solve",function(req,res){
+    const delete_req = new request({
+        date : req.body.date,
+        start_time : req.body.start_time,
+        lab : req.body.lab
+    });
+    request.delete_request(delete_req,function (err,requests) {
+        if(err) {
+            console.log("waradi");
+            res.json({state:false,msg:"Deleted Fialed"});
+        }else if(requests){
+            res.json({state:true,msg:"Deleted"});
+        }
+
+    });
+});
+
 router.get('/dashboard', passport.authenticate('jwt', { session: false }),
     function(req, res) {
     console.log(res);
         res.json({user:req.user});
     }
 );
+//get all users
+router.post("/manageusers",function(req,res){
+
+    User.findallusers(function (err,users) {
+        if(err) {
+            console.log("Requests",users);
+            res.json({state:false,msg:"User not found"});
+        }else if(users){
+            console.log("Requests",users);
+            res.json({state:true,msg:"User found...",users:users});
+        }
+
+    });
+});
 
 module.exports =  router;

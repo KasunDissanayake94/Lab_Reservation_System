@@ -43,3 +43,6 @@ module.exports.findUserbyId = function(id,callback){
     User.findOne(id,callback);
 
 }
+module.exports.findallusers = function(callback){
+    User.find(callback);
+};

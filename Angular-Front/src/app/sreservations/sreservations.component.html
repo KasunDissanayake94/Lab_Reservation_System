@@ -1,8 +1,8 @@
 <app-slidebar></app-slidebar>
-<flash-messages></flash-messages>
 <div class="container" style="background-color: #e5e5e5;margin-top: 2%">
+  <flash-messages></flash-messages>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <form class="form-horizontal">
         <legend>Reserve a Lab</legend>
 
@@ -10,14 +10,14 @@
           <label class="col-md-12 control-label" for="date">Select Date</label>
           <div class="col-md-12">
             <div class="input-group">
-              <input type="date" name="date" id="date" [(ngModel)]="reserv.date">
+              <input type="date" name="date" id="date" [(ngModel)]="reserv.date" required>
             </div>
           </div>
         </div>
         <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-12">
           <label for="start_time">Select Time Slot</label>
-          <select id="start_time" name="start_time" [(ngModel)]="reserv.start_time" class="form-control">
+          <select id="start_time" name="start_time" [(ngModel)]="reserv.start_time" class="form-control" required>
             <option value="7-8">7.00am - 8.00am</option>
             <option value="8-9">8.00am - 9.00am</option>
             <option value="9-10">9.00am - 10.00am</option>
@@ -38,7 +38,7 @@
         <div class="form-group">
           <label class="col-md-12 control-label" for="submitButton"></label>
           <div class="col-md-12">
-            <button id="submitButton" name="submitButton" class="btn btn-primary" (click)="search_labs()">Search Free Labs</button>
+            <button type="submit" id="submitButton" name="submitButton" class="btn btn-primary" (click)="search_labs()" [disabled]="call_disable()">Search Free Labs</button>
             <button id="cancelButton" name="cancelButton" class="btn btn-danger" (click)="cancelsearch()">Cancel</button>
           </div>
         </div>
@@ -46,7 +46,7 @@
 
       </form>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
       <div class="">
         <table class="table table-striped table-bordered" [ngStyle]="{'display':displaytable}">
           <thead class="hidden-xs">
@@ -55,21 +55,26 @@
             <th>Lab No</th>
             <th>Reservation Details</th>
             <th>Free or Reserved</th>
+            <th>Request for reserved slot</th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let labitem of dataset">
-              <td><strong>{{search.start_time}}AM</strong></td>
-              <td><div class="visible-xs time">Lab No : {{labitem.lab}}</div></td>
-              <td><div class="visible-xs time">{{search.start_time}}AM<br></div>Lab No : {{labitem.lab}}<br>Course : {{labitem.course}}<br>Subject : {{labitem.subject}}<br>Lecturer Name : {{labitem.lecturer}}</td>
-              <td><div class="visible-xs time"><br></div><button  name="submitButton" class="btn btn-primary" disabled (click)="doreservation(labitem.lab)">Reserved</button></td>
-          </tr>
+          <!--<tr *ngFor="let labitem of dataset">-->
+              <!--<td><strong>{{search.start_time}}AM</strong></td>-->
+              <!--<td><div class="visible-xs time">Lab No : {{labitem.lab}}</div></td>-->
+              <!--<td><div class="visible-xs time">{{search.start_time}}AM<br></div>{{labitem.lab}}<br>Course : {{labitem.course}}<br>Subject : {{labitem.subject}}<br>Lecturer Name : {{labitem.lecturer}}</td>-->
+              <!--<td><div class="visible-xs time"><br></div><button  name="submitButton" class="btn btn-primary" disabled (click)="doreservation(labitem.lab)">Reserved</button></td>-->
+          <!--</tr>-->
           <tr *ngFor="let item of labs" >
             <td><strong>{{search.start_time}}AM</strong></td>
-            <td><div class="visible-xs time">Lab No : {{item}}</div></td>
-            <td><div class="visible-xs time">{{search.start_time}}AM<br></div></td>
-            <td><div class="visible-xs time"><br></div><button  name="submitButton" class="btn btn-primary"  (click)="doreservation(item)">Free</button></td>
-          </tr>
+            <td  *ngIf="lab_array.indexOf(item) > -1 == false"><div class="visible-xs time">{{item}}</div></td>
+            <td  *ngIf="lab_array.indexOf(item) > -1 == true"><div class="visible-xs time">{{item}}</div></td>
+            <td  *ngIf="lab_array.indexOf(item) > -1 == false"><div class="visible-xs time"><br></div></td>
+            <td  *ngIf="lab_array.indexOf(item) > -1 == true"><div class="visible-xs time"><br><div *ngFor="let x of dataset"><div *ngIf="x.lab == item">Course : {{x.course}} <br>Subject : {{x.subject}} <br>Lecturer : {{x.lecturer}}</div></div> </div></td>
+            <td  *ngIf="lab_array.indexOf(item) > -1 == false"><div class="visible-xs time"><br></div><button  name="submitButton" class="btn btn-primary"  (click)="doreservation(item)">Free</button></td>
+            <td  *ngIf="lab_array.indexOf(item) > -1 == true"><div class="visible-xs time"><br></div><button  name="submitButton" class="btn btn-danger" disabled (click)="doreservation(item)">Reserved</button></td>
+            <td  *ngIf="lab_array.indexOf(item) > -1 == true"><div class="visible-xs time"><br></div><button id="requestbtn" name="submitButton" class="btn btn-success" (click)="request(item,search.start_time,search.date)" >Request</button></td>
+            <td  *ngIf="lab_array.indexOf(item) > -1 == false"><div class="visible-xs time"><br></div></td>
           </tbody>
         </table>
       </div>
@@ -165,6 +170,29 @@
         </div>
 
         <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal !-->
+
+  <!--Request for the Model-->
+  <!--Model here -->
+  <div class="backdrop" [ngStyle]="{'display':display3}"></div>
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display3}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Request for Labs</h4>
+          <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body container">
+          <!-- Form body -->
+            Are you sure that you want to request for this slot???
+        </div>
+
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" (click)="dorequest()">Yes!! I haven't any other option</button>
           <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
         </div>
       </div><!-- /.modal-content -->

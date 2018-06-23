@@ -22,7 +22,7 @@ export class VreservationsComponent implements OnInit {
   date: {year: number, month: number};
   //defining week days
   public labs = ['LAB A','LAB B','LAB C','LAB D','ELECTRONIC LAB','3RD YEAR LAB','4TH YEAR LAB','x'];
-  public time_slots = ['8-9','9-10','10-11','11-12','12-1','1-2','2-3','3-4','4-5','5-6'];
+  public time_slots = ['7-8','8-9','9-10','10-11','11-12','12-1','1-2','2-3','3-4','4-5','5-6'];
 
   search = {
     date: '',
@@ -31,6 +31,7 @@ export class VreservationsComponent implements OnInit {
 
   selectToday() {
     this.model = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
+    this.all_reservations();
   }
 constructor(private authService : AuthService,private router: Router,private _flashMessagesService: FlashMessagesService){
 
