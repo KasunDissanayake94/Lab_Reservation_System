@@ -11,7 +11,7 @@ const userSchema = new Schema({
 
 
 const User =  module.exports = mongoose.model("User",userSchema);
-
+//ADD USER
 module.exports.saveUser = function(newUser,callback){
     //To hash password
     bcrypt.genSalt(10, function(err, salt) {
@@ -20,6 +20,25 @@ module.exports.saveUser = function(newUser,callback){
             newUser.save(callback);
         });
     });
+}
+//EDIT USER
+module.exports.edit_User = function(editUser,callback){
+    //To hash password
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(editUser.password, salt, function(err, hash) {
+            editUser.password = hash;
+            console.log(editUser);
+
+            //editUser.update({ _id: ObjectId("5b1f56353092d1170c17833a")},{username:editUser.username,name:editUser.name,email:editUser.email,password:editUser.password},callback);
+        });
+    });
+};
+//DELETE USER
+module.exports.delete_user = function(deleteUser,callback){
+    const query  = {email: deleteUser.email} ;
+    console.log("cxzvxz");
+    User.remove(query,callback);
+
 };
 module.exports.findByEmail = function (email,callback) {
     const query = {email:email};

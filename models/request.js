@@ -20,7 +20,6 @@ module.exports.findRuquests = function(callback){
     requests.find(callback);
 };
 module.exports.delete_request = function(req,callback){
-    console.log(requests.date);
     const query  = { date: req.date, start_time: req.start_time ,lab:req.lab } ;
     requests.remove(query,callback);
 

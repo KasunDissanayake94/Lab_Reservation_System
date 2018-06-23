@@ -25,6 +25,7 @@ import { FlashMessagesModule } from 'angular2-flash-messages';
 
 //Import services
 import { AuthService } from './service/auth.service';
+import { AuthGuard } from './service/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { MreservationsComponent } from './mreservations/mreservations.component';
 import { SreservationsComponent } from './sreservations/sreservations.component';
@@ -40,14 +41,14 @@ const applicationRouters:Routes = [
   {path:'',component:HomeComponent},
   {path:'login',component:LoginComponent},
   {path:'register',component:RegisterComponent},
-  {path:'manageusers',component:ManageusersComponent},
-  {path:'user',component:UserComponent},
-  {path:'requests',component:RequestsComponent},
-  {path:'mreservations',component:MreservationsComponent},
-  {path:'sreservations',component:SreservationsComponent},
-  {path:'reports',component:ReportsComponent},
-  {path:'dashboard',component:DashboardComponent},
-  {path:'vreservations',component:VreservationsComponent},
+  {path:'manageusers',component:ManageusersComponent,canActivate:[AuthGuard]},
+  {path:'user',component:UserComponent,canActivate:[AuthGuard]},
+  {path:'requests',component:RequestsComponent,canActivate:[AuthGuard]},
+  {path:'mreservations',component:MreservationsComponent,canActivate:[AuthGuard]},
+  {path:'sreservations',component:SreservationsComponent,canActivate:[AuthGuard]},
+  {path:'reports',component:ReportsComponent,canActivate:[AuthGuard]},
+  {path:'dashboard',component:DashboardComponent,canActivate:[AuthGuard]},
+  {path:'vreservations',component:VreservationsComponent,canActivate:[AuthGuard]},
 ];
 
 @NgModule({
@@ -82,7 +83,7 @@ const applicationRouters:Routes = [
     OwlNativeDateTimeModule,
     Ng2SmartTableModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

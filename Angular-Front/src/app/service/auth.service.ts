@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers , Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import {getToken} from "codelyzer/angular/styles/cssLexer";
+import { tokenNotExpired } from 'angular2-jwt';
 
 @Injectable()
 export class AuthService {
@@ -20,6 +21,11 @@ export class AuthService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post("http://localhost:3000/login",userdetails,{headers:headers}).map(res=>res.json());
+  }
+  logout(){
+    this.authToken = null;
+    this.user = null;
+    localStorage.clear();
   }
 
   getProfile(){
@@ -85,5 +91,20 @@ export class AuthService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post("http://localhost:3000/manageusers",{headers:headers}).map(res=>res.json());
+  }
+
+  edituser(user: { name: string; username: string; email: string; password: string; confirmpassword: string }) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post("http://localhost:3000/manageusers/edit",user,{headers:headers}).map(res=>res.json());
+  }
+
+  deleteuser(user: { name: string; username: string; email: string; password: string; confirmpassword: string }) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post("http://localhost:3000/manageusers/delete",user,{headers:headers}).map(res=>res.json());
+  }
+  loggedIn(){
+    return tokenNotExpired('tokernId');
   }
 }

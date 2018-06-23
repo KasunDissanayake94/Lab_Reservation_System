@@ -19,6 +19,8 @@ router.post("/register",function(req,res){
         password : req.body.password
     });
 
+
+
     User.saveUser(newUser,function(err,user){
         if(err){
             res.json({state:false,msg:"Data not inserted to the Database..."});
@@ -28,8 +30,56 @@ router.post("/register",function(req,res){
     });
 
 });
+//Edit Users
+router.post("/manageusers/edit",function(req,res){
+
+
+    const editUser = new User({
+        username : req.body.username,
+        name : req.body.name,
+        email : req.body.email,
+        password : req.body.password
+    });
+
+    User.delete_user(editUser,function (err,deleteuser) {
+        if(err) {
+            res.json({state:false,msg:"Deleted Fialed"});
+        }else if(deleteuser){
+            User.saveUser(editUser,function(err,user){
+                if(err){
+                    res.json({state:false,msg:"Update Failed..."});
+                }if (user){
+                    console.log("goda");
+                    res.json({state:true,msg:"Update Successfully..."});
+                }
+            });
+        }
+
+    });
+
+
+});
+//Delete User
+router.post("/manageusers/delete",function(req,res){
+    const deleteUser = new User({
+        username : req.body.username,
+        name : req.body.name,
+        email : req.body.email,
+        password : req.body.password
+    });
+
+    User.delete_user(deleteUser,function (err,deleteuser) {
+        if(err) {
+            console.log("waradi");
+            res.json({state:false,msg:"Deleted Fialed"});
+        }else if(deleteuser){
+            res.json({state:true,msg:"Deleted"});
+        }
+
+    });
+});
+
 router.post("/login",function(req,res){
-    console.log("back");
     const email = req.body.email;
     const password = req.body.password;
     User.findByEmail(email,function (err,user) {
