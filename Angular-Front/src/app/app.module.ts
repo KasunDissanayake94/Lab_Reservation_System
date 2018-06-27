@@ -34,6 +34,8 @@ import { VreservationsComponent } from './vreservations/vreservations.component'
 
 //Calander
 import { CalendarModule } from 'angular-calendar';
+//Charts
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -82,6 +84,7 @@ const applicationRouters:Routes = [
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     Ng2SmartTableModule,
+    ChartsModule
   ],
   providers: [AuthService,AuthGuard],
   bootstrap: [AppComponent]

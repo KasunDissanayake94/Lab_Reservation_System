@@ -20,7 +20,7 @@
       <td>{{x.name}}</td>
       <td>{{x.email}}</td>
       <td><button id="editbtn" name="cancelButton" class="btn btn-success" (click)="edituser(x.name,x.username,x.email,x.password)" >Edit</button></td>
-      <td><button id="deletebtn" name="cancelButton" class="btn btn-danger" (click)="deleteuser()" >Delete</button></td>
+      <td><button id="deletebtn" name="cancelButton" class="btn btn-danger" (click)="deleteuser(x.name,x.username,x.email,x.password)" >Delete</button></td>
     </tr>
 
     </tbody>

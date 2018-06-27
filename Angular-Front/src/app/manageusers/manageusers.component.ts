@@ -48,8 +48,11 @@ export class ManageusersComponent implements OnInit {
 
   }
 
-  deleteuser() {
+  deleteuser(name,username,email,password) {
     this.display2="block";
+    this.user.name = name;
+    this.user.username = username;
+    this.user.email = email;
   }
 
   clsAssigned() {
