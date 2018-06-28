@@ -1,57 +1,53 @@
+
 <app-slidebar></app-slidebar>
+<flash-messages></flash-messages>
 <div class="container" style="background-color: #e5e5e5;margin-top: 2%">
-  <flash-messages></flash-messages>
-  <br>
-  <button id="addnewbtn" name="cancelButton" class="btn btn-default" (click)="createPdf()" style="float: right" >Download PDF</button>
-  <button  name="cancelButton" class="btn btn-default" (click)="downloadPDF()" style="float: right" >Download Chart</button>
+  <div class="row">
+    <div class="col-md-3">
+      <p>Pick a date to check</p>
+      <ngb-datepicker #dp [(ngModel)]="model" (navigate)="date = $event.next" (select)="all_reservations()"></ngb-datepicker>
+      <hr/>
+      <button class="btn btn-sm btn-outline-primary mr-2" (click)="createPdf()">Download PDF</button>
+      <button class="btn btn-sm btn-outline-primary mr-2" (click)="downloadPDF()">Download Chart</button>
 
-  <br>
-  <div class="row" >
-    <div class="col-md-6">
-      <div style="display: block;" >
-        <canvas baseChart width="400" height="400" id="content" #content
-                [datasets]="lineChartData"
-                [labels]="lineChartLabels"
-                [options]="lineChartOptions"
-                [colors]="lineChartColors"
-                [legend]="lineChartLegend"
-                [chartType]="lineChartType"
-                (chartHover)="chartHovered($event)"
-                (chartClick)="chartClicked($event)"></canvas>
+      <hr/>
+
+
+
+    </div>
+    <div class="col-md-9">
+      <div class="">
+        <!--<table class="table">-->
+          <!--<thead>-->
+          <!--<tr class="table-active">-->
+            <!--<th scope="col">#</th>-->
+            <!--<th  scope="col">LAB A</th>-->
+            <!--<th scope="col">LAB B</th>-->
+            <!--<th scope="col">LAB C</th>-->
+            <!--<th scope="col">LAB D</th>-->
+            <!--<th scope="col">ELECTRONIC LAB</th>-->
+            <!--<th scope="col">3RD YEAR LABS</th>-->
+            <!--<th scope="col">4TH YEAR LABS</th>-->
+            <!--<th scope="col">OTHER</th>-->
+          <!--</tr>-->
+          <!--</thead>-->
+          <!--<tbody  *ngFor="let item of time_slots">-->
+          <!--<tr>-->
+            <!--<th scope="row">{{item}}</th>-->
+            <!--<td *ngFor="let item2 of labs"><div *ngFor="let item1 of reserved_labs"><div *ngIf="(item == item1.start_time) && (item2 == item1.lab)"> <div class="progress">-->
+              <!--<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>-->
+            <!--</div></div></div></td>-->
+
+          <!--</tr>-->
+
+          <!--</tbody>-->
+        <!--</table>-->
       </div>
-    </div>
-    <div class="col-md-6" style="margin-bottom: 10px">
-      <table class="table table-responsive table-condensed">
-        <tr>
-          <th *ngFor="let label of lineChartLabels">{{label}}</th>
-        </tr>
-        <tr *ngFor="let d of lineChartData">
-          <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
-        </tr>
-      </table>
+      <p><small>**Note: Schedule and Speakers are subject to change.</small></p>
     </div>
   </div>
-  <!--<table class="table">-->
-    <!--<thead>-->
-    <!--<tr>-->
-      <!--<th scope="col">Username</th>-->
-      <!--<th scope="col">Name</th>-->
-      <!--<th scope="col">email</th>-->
-      <!--<th scope="col">Edit User</th>-->
-      <!--<th scope="col">Delete User</th>-->
-    <!--</tr>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-    <!--<tr *ngFor="let x of dataset">-->
-      <!--<td>{{x.username}}</td>-->
-      <!--<td>{{x.name}}</td>-->
-      <!--<td>{{x.email}}</td>-->
-      <!--<td><button id="editbtn" name="cancelButton" class="btn btn-success" (click)="edituser(x.name,x.username,x.email,x.password)" >Edit</button></td>-->
-      <!--<td><button id="deletebtn" name="cancelButton" class="btn btn-danger" (click)="deleteuser(x.name,x.username,x.email,x.password)" >Delete</button></td>-->
-    <!--</tr>-->
 
-    <!--</tbody>-->
-  <!--</table>-->
-  <!--Edit Model here-->
+</div>
 
-  </div>
+
+

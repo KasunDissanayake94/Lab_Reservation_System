@@ -49,7 +49,6 @@ router.post("/manageusers/edit",function(req,res){
                 if(err){
                     res.json({state:false,msg:"Update Failed..."});
                 }if (user){
-                    console.log("goda");
                     res.json({state:true,msg:"Update Successfully..."});
                 }
             });
@@ -251,6 +250,28 @@ router.post("/manageusers",function(req,res){
         }
 
     });
+});
+//get all data to perticular month
+router.post("/reports",function(req,res){
+    //Search reservations for the date and time slot
+    const search_lab = new reservation({
+        lab : req.body.lab,
+
+    });
+    console.log(search_lab.lab);
+    reservation.searchlab(search_lab,function(err,labs){
+        if(labs){
+            console.log("Reservations",labs);
+            res.json({state:true,msg:"Item found...",labset:labs});
+        }else{
+            res.json({state:false,msg:"No such data..."});
+            console.log("data not found");
+        }
+    });
+
+
+
+
 });
 
 module.exports =  router;

@@ -36,6 +36,7 @@ import { VreservationsComponent } from './vreservations/vreservations.component'
 import { CalendarModule } from 'angular-calendar';
 //Charts
 import { ChartsModule } from 'ng2-charts';
+import { DoughnutChartComponent } from './chart/doughnut-chart/doughnut-chart.component';
 
 
 
@@ -70,6 +71,7 @@ const applicationRouters:Routes = [
     ReportsComponent,
     DashboardComponent,
     VreservationsComponent,
+    DoughnutChartComponent,
 
   ],
   imports: [

@@ -107,4 +107,11 @@ export class AuthService {
   loggedIn(){
     return tokenNotExpired('tokernId');
   }
+  countdata(search:any){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post("http://localhost:3000/reports",search,{headers:headers}).map(res=>res.json());
+
+  }
+
 }

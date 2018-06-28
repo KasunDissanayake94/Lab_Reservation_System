@@ -25,8 +25,12 @@ module.exports.searchReservation = function(reserv,callback){
 };
 
 module.exports.search_labs = function(search_date,callback){
-    console.log(search_date);
     const query  = { date: search_date.date } ;
+    reservation.find(query,callback);
+
+};
+module.exports.searchlab = function(search_lab,callback){
+    const query  = { lab: search_lab.lab } ;
     reservation.find(query,callback);
 
 };
