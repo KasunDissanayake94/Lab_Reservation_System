@@ -8,6 +8,7 @@ import { tokenNotExpired } from 'angular2-jwt';
 export class AuthService {
   user :any;
   authToken :any;
+  type :any;
 
   constructor(private http : Http) { }
   registerUser(user){
@@ -47,6 +48,10 @@ export class AuthService {
   storeData(token,userData){
     localStorage.setItem("tokernId",token);
     localStorage.setItem("user",JSON.stringify(userData));
+    localStorage.setItem("type",userData.type);
+    localStorage.setItem("username",userData.username);
+    localStorage.setItem("name",userData.name);
+    localStorage.setItem("email",userData.email);
     this.authToken = token;
     this.user = userData;
 
@@ -107,6 +112,22 @@ export class AuthService {
   loggedIn(){
     return tokenNotExpired('tokernId');
   }
+  gettype(){
+    const typeofuser = localStorage.getItem('type');
+    return typeofuser;
+  }
+  getusername(){
+    const username = localStorage.getItem('username');
+    return username;
+  }
+  getname(){
+    const name = localStorage.getItem('name');
+    return name;
+  }
+  getemail(){
+    const email = localStorage.getItem('email');
+    return email;
+  }
   countdata(search:any){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -114,4 +135,9 @@ export class AuthService {
 
   }
 
+  count_monthly_labs(search_month:any) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post("http://localhost:3000/reports/monthly_usage",search_month,{headers:headers}).map(res=>res.json());
+  }
 }

@@ -34,3 +34,10 @@ module.exports.searchlab = function(search_lab,callback){
     reservation.find(query,callback);
 
 };
+module.exports.searchmonthlab = function(month,callback){
+    reservation.aggregate([
+        {$project: {month: {$month: '$date'},lab :'$lab'}},
+        {$match: {month: parseInt(month)}},
+    ],callback);
+
+};

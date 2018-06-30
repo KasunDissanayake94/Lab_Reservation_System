@@ -9,7 +9,8 @@
     <tr>
       <th scope="col">Username</th>
       <th scope="col">Name</th>
-      <th scope="col">email</th>
+      <th scope="col">Email</th>
+      <th scope="col">Type</th>
       <th scope="col">Edit User</th>
       <th scope="col">Delete User</th>
     </tr>
@@ -19,8 +20,9 @@
       <td>{{x.username}}</td>
       <td>{{x.name}}</td>
       <td>{{x.email}}</td>
-      <td><button id="editbtn" name="cancelButton" class="btn btn-success" (click)="edituser(x.name,x.username,x.email,x.password)" >Edit</button></td>
-      <td><button id="deletebtn" name="cancelButton" class="btn btn-danger" (click)="deleteuser(x.name,x.username,x.email,x.password)" >Delete</button></td>
+      <td>{{x.type}}</td>
+      <td><button id="editbtn" name="cancelButton" class="btn btn-success" (click)="edituser(x.name,x.username,x.email,x.password,x.type)" >Edit</button></td>
+      <td><button id="deletebtn" name="cancelButton" class="btn btn-danger" (click)="deleteuser(x.name,x.username,x.email,x.password,x.type)" >Delete</button></td>
     </tr>
 
     </tbody>
@@ -39,19 +41,34 @@
 
           <form >
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Username" name="username" value="{{user.username}}" [(ngModel)]="user.username" required="required">
+              <label for="usernameid1">Username</label>
+              <input id="usernameid1" type="text" class="form-control" placeholder="Username" name="username" value="{{user.username}}" [(ngModel)]="user.username" required="required">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Full Name" name="name" [(ngModel)]="user.name" required="required">
+              <label for="nameid1">Name</label>
+              <input id="nameid1" type="text" class="form-control" placeholder="Full Name" name="name" [(ngModel)]="user.name" required="required">
             </div>
             <div class="form-group">
-              <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="user.email" required="required" disabled>
+              <label for="emailid1">Email</label>
+              <input id="emailid1" type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="user.email" required="required" disabled>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="user.password" required="required">
+              <label for="typeid1">Type</label>
+              <select  id="typeid1" name="subject" [(ngModel)]="user.type" class="form-control" required="required" disabled>
+                <option value="admin">Admin</option>
+                <option value="lecturer">Lecturer</option>
+                <option value="instructor">Instructor</option>
+                <option value="student">Student</option>
+                <option value="OTHER">OTHER</option>
+              </select>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Confirm Paaword" name="password" [(ngModel)]="user.confirmpassword" required="required">
+              <label for="passwordid1">Password</label>
+              <input id="passwordid1" type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="user.password" required="required">
+            </div>
+            <div class="form-group">
+              <label for="conpasswordid">Confirm Password</label>
+              <input id="conpasswordid" type="password" class="form-control" placeholder="Confirm Password" name="password" [(ngModel)]="user.confirmpassword" required="required">
             </div>
           </form>
 
@@ -100,19 +117,34 @@
 
           <form >
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Username" name="username"  [(ngModel)]="user.username" required="required">
+              <label for="usernameid">Username</label>
+              <input id="usernameid" type="text" class="form-control" placeholder="Username" name="username"  [(ngModel)]="user.username" required="required">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Full Name" name="name" [(ngModel)]="user.name" required="required">
+              <label for="nameid">Name</label>
+              <input id="nameid" type="text" class="form-control" placeholder="Full Name" name="name" [(ngModel)]="user.name" required="required">
             </div>
             <div class="form-group">
-              <input type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="user.email" required="required" >
+              <label for="emailid">Email</label>
+              <input id="emailid" type="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="user.email" required="required" >
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="user.password" required="required">
+              <label for="type1id">Type</label>
+              <select  id="type1id" name="subject" [(ngModel)]="user.type" class="form-control" required="required">
+                <option value="admin">Admin</option>
+                <option value="lecturer">Lecturer</option>
+                <option value="instructor">Instructor</option>
+                <option value="student">Student</option>
+                <option value="OTHER">OTHER</option>
+              </select>
             </div>
             <div class="form-group">
-              <input type="password" class="form-control" placeholder="Confirm Paaword" name="password" [(ngModel)]="user.confirmpassword" required="required">
+              <label for="passwordid">Password</label>
+              <input id="passwordid" type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="user.password" required="required">
+            </div>
+            <div class="form-group">
+              <label for="conpassid">Confirm Password</label>
+              <input id="conpassid" type="password" class="form-control" placeholder="Confirm Paaword" name="password" [(ngModel)]="user.confirmpassword" required="required">
             </div>
           </form>
 

@@ -21,6 +21,7 @@ export class ManageusersComponent implements OnInit {
     email: '',
     password: '',
     confirmpassword: '',
+    type :''
 
   };
 
@@ -40,19 +41,21 @@ export class ManageusersComponent implements OnInit {
 
   }
 
-  edituser(name,username,email,password) {
+  edituser(name,username,email,password,type) {
     this.display="block";
     this.user.name = name;
     this.user.username = username;
     this.user.email = email;
+    this.user.type = type;
 
   }
 
-  deleteuser(name,username,email,password) {
+  deleteuser(name,username,email,password,type) {
     this.display2="block";
     this.user.name = name;
     this.user.username = username;
     this.user.email = email;
+    this.user.type = type;
   }
 
   clsAssigned() {
@@ -73,7 +76,7 @@ export class ManageusersComponent implements OnInit {
 
   EditUserData() {
     this.display="none";
-    if(this.user.password == '' || this.user.confirmpassword == '' || this.user.name == '' || this.user.username == '' || this.user.email == ''){
+    if(this.user.password == '' || this.user.confirmpassword == '' || this.user.name == '' || this.user.username == '' || this.user.email == '' || this.user.type == ''){
       this._flashMessagesService.show('Fill all the Fields!', { cssClass: 'alert-danger', timeout: 2000});
       setTimeout(()=>{ this.display = "block" }, 2000);
     }else{
@@ -92,18 +95,19 @@ export class ManageusersComponent implements OnInit {
     }
   }
 
-  adduser(name,username,email,password) {
+  adduser(name,username,email,password,type) {
     this.display3="block";
     this.user.name = name;
     this.user.username = username;
     this.user.email = email;
     this.user.password = password;
+    this.user.type = type;
     console.log(this.user);
   }
 
   AddUserData() {
     this.display3="none";
-    if(this.user.password == '' || this.user.confirmpassword == '' || this.user.name == '' || this.user.username == '' || this.user.email == ''){
+    if(this.user.password == '' || this.user.confirmpassword == '' || this.user.name == '' || this.user.username == '' || this.user.email == '' || this.user.type == ''){
       this._flashMessagesService.show('Fill all the Fields!', { cssClass: 'alert-danger', timeout: 2000});
       setTimeout(()=>{ this.display = "block" }, 2000);
     }else{

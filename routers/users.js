@@ -16,7 +16,8 @@ router.post("/register",function(req,res){
         username : req.body.username,
         name : req.body.name,
         email : req.body.email,
-        password : req.body.password
+        password : req.body.password,
+        type : req.body.type,
     });
 
 
@@ -38,7 +39,8 @@ router.post("/manageusers/edit",function(req,res){
         username : req.body.username,
         name : req.body.name,
         email : req.body.email,
-        password : req.body.password
+        password : req.body.password,
+        type : req.body.type,
     });
 
     User.delete_user(editUser,function (err,deleteuser) {
@@ -64,7 +66,8 @@ router.post("/manageusers/delete",function(req,res){
         username : req.body.username,
         name : req.body.name,
         email : req.body.email,
-        password : req.body.password
+        password : req.body.password,
+        type : req.body.type,
     });
 
     User.delete_user(deleteUser,function (err,deleteuser) {
@@ -99,7 +102,9 @@ router.post("/login",function(req,res){
                                 id:user._id,
                                 name:user.name,
                                 username:user.username,
-                                email:user.email
+                                email:user.email,
+                                type:user.type,
+
                             }
                         });
                     console.log(token);
@@ -251,7 +256,7 @@ router.post("/manageusers",function(req,res){
 
     });
 });
-//get all data to perticular month
+//get all data to perticular lab
 router.post("/reports",function(req,res){
     //Search reservations for the date and time slot
     const search_lab = new reservation({
@@ -269,8 +274,21 @@ router.post("/reports",function(req,res){
         }
     });
 
-
-
+});
+//get monthly usage of labs
+router.post("/reports/monthly_usage",function(req,res){
+    console.log("here");
+    //Search reservations for the date and time slot
+    var month = req.body.month;
+    reservation.searchmonthlab(month,function(err,labs){
+        if(labs){
+            console.log("Reservations",labs);
+            res.json({state:true,msg:"Item found...",labset:labs});
+        }else{
+            res.json({state:false,msg:"No such data..."});
+            console.log("data not found");
+        }
+    });
 
 });
 

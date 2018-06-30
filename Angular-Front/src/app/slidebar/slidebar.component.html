@@ -4,7 +4,7 @@
 </head>
 <body><div class="area"></div><nav class="main-menu">
   <ul>
-    <li>
+    <li *ngIf="auth.gettype() == 'admin'">
       <a [routerLink]="['/manageusers']">
         <i class="fa fa-home fa-2x"></i>
         <span class="nav-text">
@@ -22,7 +22,7 @@
       </a>
 
     </li>
-    <li class="has-subnav">
+    <li class="has-subnav" *ngIf="auth.gettype() == 'admin'">
       <a [routerLink]="['/requests']">
         <i class="fa fa-list fa-2x"></i>
         <span class="nav-text">
@@ -41,7 +41,7 @@
 
     </li>
 
-    <li>
+    <li *ngIf="auth.gettype() != 'student'">
       <a [routerLink]="['/sreservations']">
         <i class="fa fa-font fa-2x"></i>
         <span class="nav-text">
@@ -65,7 +65,8 @@
                         <!--</span>-->
       <!--</a>-->
     <!--</li>-->
-    <li>
+
+    <li *ngIf="auth.gettype() != 'student'">
       <a [routerLink]="['/reports']">
         <i class="fa fa-info fa-2x"></i>
         <span class="nav-text">
