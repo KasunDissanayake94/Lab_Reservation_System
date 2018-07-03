@@ -41,3 +41,8 @@ module.exports.searchmonthlab = function(month,callback){
     ],callback);
 
 };
+module.exports.deletereservation = function(delete_request,callback){
+    const query  = { date: delete_request.date, start_time: delete_request.start_time ,lab:delete_request.lab } ;
+    reservation.remove(query,callback);
+
+};

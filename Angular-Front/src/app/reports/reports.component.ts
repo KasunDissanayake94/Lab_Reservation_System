@@ -160,8 +160,6 @@ export class ReportsComponent implements OnInit {
   //   });
   //   doc.save('chart.pdf');
   // }
-
-
   generate_annual_report() {
     this.generateusage = 'block';
     this.generatemothlyusage = 'none';
@@ -176,7 +174,6 @@ export class ReportsComponent implements OnInit {
     this.displaylabUage = 'none';
     this.displayMonthlylabUage = 'none';
   }
-
   generate_users_report() {
     this.generateusage = 'none';
     this.generatemothlyusage = 'none';

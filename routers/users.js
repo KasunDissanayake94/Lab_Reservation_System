@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path =  require("path");
 const reservation = require('../models/reservation');
+const requestsend = require('../models/request_send');
 const request = require('../models/request');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
@@ -292,4 +293,53 @@ router.post("/reports/monthly_usage",function(req,res){
 
 });
 
+//Delete Reservation by admin
+router.post("/sreservations/delete_reservation",function(req,res){
+    const delete_request = new reservation({
+        date : req.body.date,
+        start_time : req.body.start_time,
+        lab : req.body.lab,
+    });
+
+    reservation.deletereservation(delete_request,function(err,delete_request){
+        console.log(delete_request);
+        if(err){
+            res.json({state:false,msg:"Failed"});
+        }if (delete_request){
+            res.json({state:true,msg:"Deleted"});
+        }
+    });
+});
+
+router.post("/requests/solve_send",function(req,res){
+    const request_send = new requestsend({
+        date : req.body.date,
+        start_time : req.body.start_time,
+        lab : req.body.lab,
+        request_by : req.body.request_by
+    });
+    requestsend.saverequests_send(request_send,function (err,requests) {
+        if(err) {
+            console.log("waradi");
+            res.json({state:false,msg:" Fialed"});
+        }else if(requests){
+            res.json({state:true,msg:"Send Success"});
+        }
+
+    });
+});
+//get all serach_all_solve_requests
+router.post("/user/serach_all_solve_requests",function(req,res){
+
+    requestsend.serach_all_solve_requests(function (err,solve) {
+        if(err) {
+            console.log("Requests",solve);
+            res.json({state:false,msg:"User not found"});
+        }else if(solve){
+            console.log("Requests",solve);
+            res.json({state:true,msg:"User found...",solve:solve});
+        }
+
+    });
+});
 module.exports =  router;

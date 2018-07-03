@@ -55,7 +55,6 @@ export class AuthService {
     this.authToken = token;
     this.user = userData;
 
-
   }
 //Add a reservation
   addreservation(reserv: { date: string; start_time: string; lab: string; lecturer: string; subject: string; course: string }) {
@@ -134,10 +133,27 @@ export class AuthService {
     return this.http.post("http://localhost:3000/reports",search,{headers:headers}).map(res=>res.json());
 
   }
-
   count_monthly_labs(search_month:any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post("http://localhost:3000/reports/monthly_usage",search_month,{headers:headers}).map(res=>res.json());
+  }
+
+  delete_reservations(delete_reservations: { date: string; start_time: string; lab: string; }) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post("http://localhost:3000/sreservations/delete_reservation",delete_reservations,{headers:headers}).map(res=>res.json());
+  }
+
+  send_solve(solved: { date: string; start_time: string; lab: string; request_by: string }) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post("http://localhost:3000/requests/solve_send",solved,{headers:headers}).map(res=>res.json());
+  }
+
+  serach_all_solve_requests() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post("http://localhost:3000/user/serach_all_solve_requests",{headers:headers}).map(res=>res.json());
   }
 }

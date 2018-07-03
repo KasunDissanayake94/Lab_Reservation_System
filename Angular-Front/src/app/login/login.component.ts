@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     const userdetails ={
       email : this.email,
       password : this.password
-    }
+    };
     this.authService.logginuser(userdetails).subscribe(res=>{
       console.log(res);
       if(res.state == true){

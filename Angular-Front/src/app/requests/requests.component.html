@@ -6,12 +6,7 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="pull-right">
-              <div class="btn-group">
-                <button type="button" class="btn btn-success btn-filter" data-target="pagado">Pagado</button>
-                <button type="button" class="btn btn-warning btn-filter" data-target="pendiente">Pendiente</button>
-                <button type="button" class="btn btn-danger btn-filter" data-target="cancelado">Cancelado</button>
-                <button type="button" class="btn btn-default btn-filter" data-target="all">Todos</button>
-              </div>
+
             </div>
             <div class="table-container">
               <table class="table table-filter" >
@@ -19,7 +14,7 @@
                 <tr  *ngFor="let item of dataset1" data-status="pagado">
                   <td>
                     <div class="ckbox">
-                      <button id="cancelButton" name="cancelButton" class="btn btn-success" (click)="solve(item.date,item.start_time,item.lab)">Solve Request</button>
+                      <button id="cancelButton" name="cancelButton" class="btn btn-success" (click)="solve(item.date,item.start_time,item.lab,item.request_by)">Solve Request</button>
                     </div>
                   </td>
                   <td>
@@ -43,10 +38,6 @@
                     </div>
                   </td>
                 </tr>
-
-
-
-
                 </tbody>
               </table>
             </div>

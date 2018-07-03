@@ -14,7 +14,9 @@ export class SreservationsComponent implements OnInit {
   dsplay='none';
   dsplay2 = 'none';
   display3 = 'none';
+  display4= 'none';
   delete_item ='none';
+  user_type='';
   public selectedMoments = [new Date(), new Date()];
   date: Date = new Date();
   requestby = '';
@@ -51,6 +53,12 @@ export class SreservationsComponent implements OnInit {
     lab: '',
     request_by:''
   }
+  delete_reservations = {
+  date: '',
+  start_time: '',
+    lab: '',
+}
+
   private result: any;
   private displaytable: string;
   private selected_lab: string;
@@ -59,6 +67,8 @@ export class SreservationsComponent implements OnInit {
 
   constructor(private authService : AuthService,private router: Router,private _flashMessagesService: FlashMessagesService) {
     this.displaytable='none';
+    this.user_type = authService.gettype();
+    this.reserv.lecturer = authService.getname();
   }
 
 
@@ -68,7 +78,10 @@ export class SreservationsComponent implements OnInit {
   doreservation(selectlab) {
     this.selected_lab = selectlab;
     this.reserv.lab = this.selected_lab;
+    this.reserv.lecturer = this.authService.getname();
     this.display="block";
+    this.reserv.course ='';
+    this.reserv.subject ='';
   }
   closeResolved(){
     this.display="none";
@@ -76,21 +89,30 @@ export class SreservationsComponent implements OnInit {
   onCloseHandled(){
     this.display='none';
     this.display3='none';
+    this.display4='none';
   }
   //----------------------------------------
   addrevervation(){
     this.display='none';
-    this.authService.addreservation(this.reserv).subscribe(res=>{
-      if(res.state == true){
-        this._flashMessagesService.show('Reservation Done Successfully!', { cssClass: 'alert-success', timeout: 5000 });
-      }else if(res.state == false){
-        this._flashMessagesService.show('Reservation Failed!', { cssClass: 'alert-danger', timeout: 5000});
-      }
-    });
+    this.reserv.lecturer = this.authService.getname();
+    if(this.reserv.subject=='' || this.reserv.course==''){
+      this._flashMessagesService.show('Pease fill all the fields!', { cssClass: 'alert-danger', timeout: 2000});
+      setTimeout(()=>{ this.display = "block" }, 2000);
+    }else{
+      this.authService.addreservation(this.reserv).subscribe(res=>{
+        if(res.state == true){
+          this._flashMessagesService.show('Reservation Done Successfully!', { cssClass: 'alert-success', timeout: 2000 });
+        }else if(res.state == false){
+          this._flashMessagesService.show('Reservation Failed!', { cssClass: 'alert-danger', timeout: 2000});
+        }
+      });
+    }
+
 
   }
   search_labs(){
     if(this.reserv.date == '' || this.reserv.start_time == ''){
+      this._flashMessagesService.show('Please Select the date and time slot!', { cssClass: 'alert-danger', timeout: 2000});
       return false;
     }
     this.disable_status = true;
@@ -132,15 +154,15 @@ export class SreservationsComponent implements OnInit {
 }
   dorequest(){
     //Hard coded
-    this.requestby = "instructor";
+    this.requestby = this.authService.getname();
     this.request_labs.request_by = this.requestby;
     //send to the backend
     this.display3='none';
     this.authService.add_request(this.request_labs).subscribe(res=>{
       if(res.state == true){
-        this._flashMessagesService.show('Request send to the Admin Successfully!', { cssClass: 'alert-success', timeout: 5000 });
+        this._flashMessagesService.show('Request send to the Admin Successfully!', { cssClass: 'alert-success', timeout: 2000 });
       }else if(res.state == false){
-        this._flashMessagesService.show('Request send Failed!', { cssClass: 'alert-danger', timeout: 5000});
+        this._flashMessagesService.show('Request send Failed!', { cssClass: 'alert-danger', timeout: 2000});
       }
     });
 
@@ -151,4 +173,23 @@ export class SreservationsComponent implements OnInit {
   }
 
 
+  delete_reservation(item: string, start_time: string, date: string) {
+    this.display4="block";
+    this.delete_reservations.date = date;
+    this.delete_reservations.start_time = start_time;
+    this.delete_reservations.lab = item;
+  }
+
+  dodelete() {
+    //Hard coded
+    this.display4='none';
+    this.authService.delete_reservations(this.delete_reservations).subscribe(res=>{
+      if(res.state == true){
+        this._flashMessagesService.show('Reservation delete Successfully!', { cssClass: 'alert-success', timeout: 2000 });
+        this.router.navigate(['manageusers']);
+      }else if(res.state == false){
+        this._flashMessagesService.show('Reservation Delete Failed!', { cssClass: 'alert-danger', timeout: 2000});
+      }
+    });
+  }
 }

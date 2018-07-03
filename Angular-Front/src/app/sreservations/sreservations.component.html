@@ -55,7 +55,7 @@
             <th>Lab No</th>
             <th>Reservation Details</th>
             <th>Free or Reserved</th>
-            <th>Request for reserved slot</th>
+            <th >Request/Delete for reserved slot</th>
           </tr>
           </thead>
           <tbody>
@@ -73,7 +73,8 @@
             <td  *ngIf="lab_array.indexOf(item) > -1 == true"><div class="visible-xs time"><br><div *ngFor="let x of dataset"><div *ngIf="x.lab == item">Course : {{x.course}} <br>Subject : {{x.subject}} <br>Lecturer : {{x.lecturer}}</div></div> </div></td>
             <td  *ngIf="lab_array.indexOf(item) > -1 == false"><div class="visible-xs time"><br></div><button  name="submitButton" class="btn btn-primary"  (click)="doreservation(item)">Free</button></td>
             <td  *ngIf="lab_array.indexOf(item) > -1 == true"><div class="visible-xs time"><br></div><button  name="submitButton" class="btn btn-danger" disabled (click)="doreservation(item)">Reserved</button></td>
-            <td  *ngIf="lab_array.indexOf(item) > -1 == true"><div class="visible-xs time"><br></div><button id="requestbtn" name="submitButton" class="btn btn-success" (click)="request(item,search.start_time,search.date)" >Request</button></td>
+            <td  *ngIf="lab_array.indexOf(item) > -1 == true && user_type != 'admin'"><div class="visible-xs time"><br></div><button id="requestbtn" name="submitButton" class="btn btn-success" (click)="request(item,search.start_time,search.date)" >Request</button></td>
+            <td  *ngIf="lab_array.indexOf(item) > -1 == true && user_type == 'admin'"><div class="visible-xs time"><br></div><button id="deletebtn" name="deleteBtn" class="btn btn-danger" (click)="delete_reservation(item,search.start_time,search.date)" >Delete Reservation</button></td>
             <td  *ngIf="lab_array.indexOf(item) > -1 == false"><div class="visible-xs time"><br></div></td>
           </tbody>
         </table>
@@ -143,18 +144,8 @@
 
               </div>
               <div class="form-group">
-                <label for="lecturerid">Lecturer</label>
-                <select id="lecturerid" name="lecturer" [(ngModel)]="reserv.lecturer" class="form-control">
-                  <option value="SCS_001">K Karunaathne</option>
-                  <option value="SCS_002">Aruna Silva</option>
-                  <option value="SCS_003">S Samarathunga</option>
-                  <option value="SCS_004">Dulmina Renuka</option>
-                  <option value="SCS_005">Kasun Dissanayake</option>
-                  <option value="SCS_006">Y Perera</option>
-                  <option value="SCS_007">Wasura Waththearachchi</option>
-                  <option value="SCS_008">Nimal Kodikara</option>
-                  <option value="other">Other</option>
-                </select>
+                <label for="lectid">Lecturer/Instructor</label>
+                <input type="text" class="form-control" id="lectid"   placeholder="Lecturer/Instructor" value={{reserv.lecturer}} disabled >
               </div>
 
               <div align="center">
@@ -177,7 +168,6 @@
   </div><!-- /.modal !-->
 
   <!--Request for the Model-->
-  <!--Model here -->
   <div class="backdrop" [ngStyle]="{'display':display3}"></div>
   <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display3}">
     <div class="modal-dialog" role="document">
@@ -198,7 +188,27 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal !-->
-  </div>
+  <!--delete for the Model-->
+  <div class="backdrop" [ngStyle]="{'display':display4}"></div>
+  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display4}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete Reservation</h4>
+          <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body container">
+          <!-- Form body -->
+          Are you sure that you want to Delete this slot???
+        </div>
 
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" (click)="dodelete()">Yes</button>
+          <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal !-->
+  </div>
 
 
