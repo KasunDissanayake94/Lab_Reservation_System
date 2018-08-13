@@ -102,8 +102,10 @@ export class SreservationsComponent implements OnInit {
       this.authService.addreservation(this.reserv).subscribe(res=>{
         if(res.state == true){
           this._flashMessagesService.show('Reservation Done Successfully!', { cssClass: 'alert-success', timeout: 2000 });
+          this.displaytable = 'none';
         }else if(res.state == false){
           this._flashMessagesService.show('Reservation Failed!', { cssClass: 'alert-danger', timeout: 2000});
+
         }
       });
     }
@@ -161,6 +163,7 @@ export class SreservationsComponent implements OnInit {
     this.authService.add_request(this.request_labs).subscribe(res=>{
       if(res.state == true){
         this._flashMessagesService.show('Request send to the Admin Successfully!', { cssClass: 'alert-success', timeout: 2000 });
+        this.displaytable = 'none';
       }else if(res.state == false){
         this._flashMessagesService.show('Request send Failed!', { cssClass: 'alert-danger', timeout: 2000});
       }
@@ -186,7 +189,7 @@ export class SreservationsComponent implements OnInit {
     this.authService.delete_reservations(this.delete_reservations).subscribe(res=>{
       if(res.state == true){
         this._flashMessagesService.show('Reservation delete Successfully!', { cssClass: 'alert-success', timeout: 2000 });
-        this.router.navigate(['manageusers']);
+        this.displaytable = 'none';
       }else if(res.state == false){
         this._flashMessagesService.show('Reservation Delete Failed!', { cssClass: 'alert-danger', timeout: 2000});
       }

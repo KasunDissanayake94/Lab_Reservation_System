@@ -4,6 +4,7 @@ import {FlashMessagesService} from "angular2-flash-messages";
 import {Router} from "@angular/router";
 import {AuthService} from "../service/auth.service";
 import {delay} from "rxjs/operators";
+import {componentRefresh} from "@angular/core/src/render3/instructions";
 @Component({
   selector: 'app-manageusers',
   templateUrl: './manageusers.component.html',
@@ -87,6 +88,7 @@ export class ManageusersComponent implements OnInit {
         this.authService.edituser(this.user).subscribe(res=>{
           if(res.state == true){
             this._flashMessagesService.show('Update User Deatils Successfully!', { cssClass: 'alert-success', timeout: 5000 });
+
           }else if(res.state == false){
             this._flashMessagesService.show('Failed to update user Deatils!', { cssClass: 'alert-danger', timeout: 5000});
           }
